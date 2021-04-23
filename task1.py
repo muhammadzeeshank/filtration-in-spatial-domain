@@ -17,8 +17,13 @@ img1 = cv2.imread('images/img_face.tif', 0)
 padsize = int(size/2)
 img = np.lib.pad(img1, ((padsize, padsize), (padsize, padsize)), mode='constant',
                  constant_values=(0, 0))
+rows, cols = img.shape
+for i in range(size):
+    for j in range(size):
+        val += img[i][j] * mask[i][j]
+
 print(mask)
-print(img)
-# cv2.imshow('img', img)
+
+cv2.imshow('img', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
