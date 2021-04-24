@@ -68,7 +68,6 @@ def medianFilter(img, img1, size):
     : return: median of image
     """
     rows, cols = img1.shape
-    img2 = np.zeros([rows, cols])
     for y in tqdm(range(rows)):
         for x in range(cols):
             data = []
@@ -81,7 +80,7 @@ def medianFilter(img, img1, size):
 
 # **** main ***
 # Reading image from drive
-orig_img = cv2.imread('images/img2b.png', 0)
+orig_img = cv2.imread('images/img2a.tif', 0)
 mask, mask_size = constructMask()
 pad_img = padImage(orig_img, mask_size)
 # final_img = applyFilter(pad_img, orig_img, mask)
