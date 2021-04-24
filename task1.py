@@ -48,6 +48,7 @@ def applyFilter(img, img1, mask):
     """
     # convolving mask with image
     rows, cols = img1.shape
+    img2 = np.zeros([rows, cols])
     size = mask.shape[0]
     for y in tqdm(range(rows)):
         for x in range(cols):
@@ -59,12 +60,32 @@ def applyFilter(img, img1, mask):
     return img1
 
 
+def medianFilter(img, img1, size):
+    """
+    : param img: the padded image
+    : param img1: the original image
+    : param size: size of mask
+    : return: median of image
+    """
+    rows, cols = img1.shape
+    img2 = np.zeros([rows, cols])
+    for y in tqdm(range(rows)):
+        for x in range(cols):
+            data = []
+            for i in range(size):
+                for j in range(size):
+                    data.append(img[i+y][j+x])
+            img1[y][x] = np.median(data)
+    return img1
+
+
 # **** main ***
 # Reading image from drive
-orig_img = cv2.imread('images/img1b.tif', 0)
+orig_img = cv2.imread('images/img2b.png', 0)
 mask, mask_size = constructMask()
 pad_img = padImage(orig_img, mask_size)
-final_img = applyFilter(pad_img, orig_img, mask)
+# final_img = applyFilter(pad_img, orig_img, mask)
+final_img = medianFilter(pad_img, orig_img, mask_size)
 cv2.imwrite('img1b.jpg', final_img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
