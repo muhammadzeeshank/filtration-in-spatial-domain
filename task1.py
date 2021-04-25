@@ -80,13 +80,13 @@ def medianFilter(img, img1, size):
 
 # **** main ***
 # Reading image from drive
-orig_img = cv2.imread('images/img2a.tif', 0)
+orig_img = cv2.imread('images/img1b.tif', 0)
 mask, mask_size = constructMask()
 pad_img = padImage(orig_img, mask_size)
 # # to apply filter by your choice
-# final_img = applyFilter(pad_img, orig_img, mask)
+final_img = applyFilter(pad_img, orig_img, mask)
 # # to apply median Filter
-final_img = medianFilter(pad_img, orig_img, mask_size)
+# final_img = medianFilter(pad_img, orig_img, mask_size)
 # final image
 cv2.imwrite('img1b.jpg', final_img)
 cv2.waitKey(0)
